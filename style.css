@@ -1,0 +1,19 @@
+[data-theme="dark"] .dark-mode-box {
+    background-color: #212529 !important;
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+pre {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+[data-theme="dark"] pre {
+    background-color: #343a40;
+    color: #f1f1f1;
+}

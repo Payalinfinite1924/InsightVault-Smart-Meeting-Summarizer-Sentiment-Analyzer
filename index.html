@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <title>InsightVault – Smart Meeting Analyzer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --light-bg: #f4f6f8;
+            --light-card: #ffffff;
+            --light-text: #212529;
+
+            --dark-bg: #121212;
+            --dark-card: #1f1f2e;
+            --dark-text: #f1f1f1;
+
+            --accent: #4CAF50;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            transition: all 0.3s ease-in-out;
+        }
+
+        [data-theme="dark"] body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        .main-card {
+            background-color: var(--light-card);
+            padding: 2rem 2.5rem;
+            border-radius: 18px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            max-width: 700px;
+            width: 100%;
+        }
+
+        [data-theme="dark"] .main-card {
+            background-color: var(--dark-card);
+        }
+
+        h1, p {
+            color: inherit;
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        [data-theme="dark"] .form-control,
+        [data-theme="dark"] .form-select {
+            background-color: #2d2d3d;
+            color: #fff;
+            border: 1px solid #555;
+        }
+
+        pre {
+            background-color: #f1f1f1;
+            padding: 1rem;
+            border-radius: 10px;
+            white-space: pre-wrap;
+        }
+
+        [data-theme="dark"] pre {
+            background-color: #2d2d3d;
+            color: #eee;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.85rem;
+            margin-top: 2rem;
+            color: #888;
+        }
+
+        [data-theme="dark"] .footer {
+            color: #ccc;
+        }
+
+        #loader {
+            display: none;
+        }
+
+        #loader.active {
+            display: block;
+            margin-top: 1rem;
+        }
+
+        .theme-toggle, .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+        }
+    </style>
+</head>
+<body class="d-flex align-items-center justify-content-center min-vh-100">
+
+    <div class="main-card mx-auto text-center">
+        <h1 class="mb-2">🎧 InsightVault</h1>
+        <p class="mb-4">Smart Meeting Summarizer & Sentiment Analyzer</p>
+
+        <div class="toggle-bar">
+            <div class="theme-toggle">
+                🌗 Dark Mode:
+                <input type="checkbox" id="darkToggle">
+            </div>
+            <div class="lang-toggle">
+                🌐 Language:
+                <select id="languageToggle" class="form-select form-select-sm w-auto">
+                    <option value="en">English</option>
+                    <option value="hi">Hindi</option>
+                </select>
+            </div>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="meeting" class="form-control mb-3" required>
+            <button type="submit" class="btn btn-success w-100">Upload & Analyze</button>
+        </form>
+
+        <div id="loader" class="text-center">
+            <div class="spinner-border text-primary mt-3" role="status">
+                <span class="visually-hidden">Analyzing...</span>
+            </div>
+            <p class="mt-2">Processing... Please wait</p>
+        </div>
+
+        {% if uploaded %}
+        <div class="mt-4 text-start">
+            <h5>📝 Summary Report</h5>
+            <pre>{{ report | safe }}</pre>
+        </div>
+        {% endif %}
+
+        <div class="footer mt-4">
+            💡 Developed with 💚 by <strong>Payal</strong>
+        </div>
+    </div>
+
+    <script>
+        const darkToggle = document.getElementById('darkToggle');
+        const root = document.documentElement;
+
+        darkToggle.addEventListener('change', () => {
+            root.setAttribute('data-theme', darkToggle.checked ? 'dark' : 'light');
+        });
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', () => {
+            document.getElementById('loader').classList.add('active');
+        });
+    </script>
+</body>
+</html>

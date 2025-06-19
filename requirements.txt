@@ -1,0 +1,6 @@
+flask
+transformers
+torch
+textblob
+librosa
+openai-whisper
